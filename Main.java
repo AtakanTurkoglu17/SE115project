@@ -47,7 +47,22 @@ public class Main {
     // ======== 10 REQUIRED METHODS (Students fill these) ========
 
     public static String mostProfitableCommodityInMonth(int month) {
-        return "DUMMY"; 
+        if (month <0 || month >= MONTHS) {
+            return "INVALID_MONTH";
+        }
+        int highestSum = 0;
+        int highestIndex = 0;
+        for(int i = 0; i< COMMS; i++) {
+            int sum = 0;
+            for (int j = 0; j < DAYS; j++) {
+                sum += profits[month][j][i];
+            }
+            if (sum > highestSum) {
+                highestSum = sum;
+                highestIndex = i;
+            }
+        }
+        return commodities[highestIndex] + " " + highestSum;
     }
 
     public static int totalProfitOnDay(int month, int day) {
