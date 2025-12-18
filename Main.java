@@ -21,7 +21,7 @@ public class Main {
             try {
                 reader = new Scanner(java.nio.file.Paths.get("Data_Files/" + months[i] + ".txt"));
                 //Instead of importing it I used java.nio.file.paths this way because I'm trying to change main as
-                //least as much possible.
+                //least as possible.
                 while (reader.hasNextLine()) {
                     String line = reader.nextLine();
                     String[] parts = line.split(",");
@@ -66,7 +66,14 @@ public class Main {
     }
 
     public static int totalProfitOnDay(int month, int day) {
-        return 1234;
+        if (month < 0 || month >= MONTHS || day < 1 || day > DAYS) {
+            return -99999;
+        }
+        int sum = 0;
+        for (int i = 0 ; i < COMMS; i++) {
+            sum += profits[month][day-1][i];
+        }
+        return sum;
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
