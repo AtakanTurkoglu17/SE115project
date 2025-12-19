@@ -1,5 +1,4 @@
 // Main.java — Students version
-import java.io.*;
 import java.util.*;
 
 public class Main {
@@ -102,7 +101,7 @@ public class Main {
         if (month < 0 || month >+ MONTHS) {
             return -1;
         }
-        int day = 1;
+        int bestDay = 1;
         int highest = 0;
         for (int i = 0; i < DAYS ; i++) {
             int sum = 0;
@@ -111,14 +110,35 @@ public class Main {
             }
             if (sum > highest) {
                 highest = sum;
-                day = i + 1;
+                bestDay = i + 1;
             }
         }
-        return day;
+        return bestDay;
     }
     
-    public static String bestMonthForCommodity(String comm) { 
-        return "DUMMY"; 
+    public static String bestMonthForCommodity(String comm) {
+        int value = -1;
+        for (int i = 0; i < COMMS; i++) {
+            if (commodities[i].equals(comm)) {
+                value = 0;
+            }
+            if ( value == 0) {
+                return "INVALID COMMODITY";
+            }
+        }
+        int bestMonth = 0;
+        int highest = 0;
+        for (int i = 0; i<MONTHS; i++) {
+            int sum = 0;
+            for(int j = 0; j < DAYS; j++) {
+                sum += profits[i][j][value];
+            }
+            if (sum > highest) {
+                highest = sum;
+                bestMonth = i;
+            }
+        }
+        return months[bestMonth];
     }
 
     public static int consecutiveLossDays(String comm) { 
