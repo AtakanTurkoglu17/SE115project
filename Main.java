@@ -77,7 +77,25 @@ public class Main {
     }
 
     public static int commodityProfitInRange(String commodity, int from, int to) {
-        return 1234;
+        if(from < 1 || to > DAYS || from > to) {
+            return -99999;
+        }
+        int value = -1;
+        for (int i = 0; i < COMMS; i++) {
+            if (commodities[i].equals(commodity)) {
+                value = i;
+            }
+        }
+        if (value == -1) {
+            return -99999;
+        }
+        int totalProfit = 0;
+        for (int i = 0; i < MONTHS; i++) {
+            for (int j = from -1; j<= to - 1; j++) {
+                totalProfit += profits[i][j][value];
+            }
+        }
+        return totalProfit;
     }
 
     public static int bestDayOfMonth(int month) { 
