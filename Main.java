@@ -98,8 +98,23 @@ public class Main {
         return totalProfit;
     }
 
-    public static int bestDayOfMonth(int month) { 
-        return 1234; 
+    public static int bestDayOfMonth(int month) {
+        if (month < 0 || month >+ MONTHS) {
+            return -1;
+        }
+        int day = 1;
+        int highest = 0;
+        for (int i = 0; i < DAYS ; i++) {
+            int sum = 0;
+            for (int j = 0; j < COMMS; j++) {
+                sum += profits[month][i][j];
+            }
+            if (sum > highest) {
+                highest = sum;
+                day = i + 1;
+            }
+        }
+        return day;
     }
     
     public static String bestMonthForCommodity(String comm) { 
