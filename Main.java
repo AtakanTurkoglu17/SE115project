@@ -191,7 +191,7 @@ public class Main {
     }
 
     public static int biggestDailySwing(int month) {
-        if (month < 0; || month >= MONTHS) {
+        if (month < 0 || month >= MONTHS) {
             return -99999;
         }
         int biggestDifference = 0;
@@ -213,8 +213,35 @@ public class Main {
         return biggestDifference;
     }
     
-    public static String compareTwoCommodities(String c1, String c2) { 
-        return "DUMMY is better by 1234"; 
+    public static String compareTwoCommodities(String c1, String c2) {
+        int commodityValue1 = -1;
+        int commodityValue2 = -1;
+        for (int i = 0; i< COMMS; i++) {
+            if ((commodities[i].equals(c1))) {
+                commodityValue1 = i;
+            }
+            if (commodities[i].equals(c2)) {
+                commodityValue2 = i;
+            }
+        }
+        if (commodityValue1 == -1 || commodityValue2 == -1) {
+            return "INVALID COMMODITY";
+        }
+        int profitValue1 = 0;
+        int profitValue2 = 0;
+        for (int i = 0; i< MONTHS; i++) {
+            for (int j = 0; j<DAYS; j++) {
+                profitValue1 = profits[i][j][commodityValue1];
+                profitValue2 = profits[i][j][commodityValue2];
+            }
+        }
+        if (profitValue1 > profitValue2) {
+            return c1 + " is better by " + (profitValue1 - profitValue2);
+        } else if (profitValue2 > profitValue1) {
+            return c2 + " is better by " + (profitValue2-profitValue1);
+        } else {
+            return "Equal";
+        }
     }
     
     public static String bestWeekOfMonth(int month) { 
