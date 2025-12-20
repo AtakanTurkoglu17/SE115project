@@ -10,6 +10,7 @@ public class Main {
                               "July","August","September","October","November","December"};
     static int [][][] profits = new int[MONTHS][DAYS][COMMS];
     //I had to change main because I couldn't use it outside of loaddata.
+    // The notes in the methods are meant to show the final changes that I made and why I made before uploading it to github.
 
     
 
@@ -98,9 +99,9 @@ public class Main {
     }
 
     public static int bestDayOfMonth(int month) {
-        if (month < 0 || month >+ MONTHS) {
+        if (month < 0 || month >= MONTHS) {
             return -1;
-        }
+        } // I wrote >+ instead of >= by mistake.
         int bestDay = 1;
         int highest = 0;
         for (int i = 0; i < DAYS ; i++) {
@@ -120,11 +121,12 @@ public class Main {
         int value = -1;
         for (int i = 0; i < COMMS; i++) {
             if (commodities[i].equals(comm)) {
-                value = 0;
+                value = i; // Changed it to i from 0.
             }
-            if ( value == 0) {
-                return "INVALID COMMODITY";
             }
+        if ( value == -1) { // Changed it from 0 to 1.
+            return "INVALID_COMMODITY"; // Added underscore because its what the assignment wants.
+            // if statement was inside of the for loop.
         }
         int bestMonth = 0;
         int highest = 0;
@@ -195,12 +197,12 @@ public class Main {
             return -99999;
         }
         int biggestDifference = 0;
-        for (int i = 0; i < DAYS; i++) {
+        for (int i = 1; i < DAYS; i++) { // Changed the start point of the loop.
             int today = 0;
             int yesterday = 0;
             for (int j = 0; j<COMMS; j++) {
                 today += profits[month][i][j];
-                yesterday += profits[month][i-1][j];
+                yesterday += profits[month][i - 1][j];
             }
             int difference = today -yesterday;
             if (difference<0) {
@@ -225,14 +227,14 @@ public class Main {
             }
         }
         if (commodityValue1 == -1 || commodityValue2 == -1) {
-            return "INVALID COMMODITY";
+            return "INVALID_COMMODITY"; //Added underscore.
         }
         int profitValue1 = 0;
         int profitValue2 = 0;
         for (int i = 0; i< MONTHS; i++) {
             for (int j = 0; j<DAYS; j++) {
-                profitValue1 = profits[i][j][commodityValue1];
-                profitValue2 = profits[i][j][commodityValue2];
+                profitValue1 += profits[i][j][commodityValue1]; // Forgot to put +.
+                profitValue2 += profits[i][j][commodityValue2]; // Same thing.
             }
         }
         if (profitValue1 > profitValue2) {
@@ -246,7 +248,7 @@ public class Main {
     
     public static String bestWeekOfMonth(int month) {
         if (month < 0 || month >= MONTHS) {
-            return "INVALID MONTH";
+            return "INVALID_MONTH"; // Added underscore.
         }
         int bestWeek = 1;
         int highest = 0;
