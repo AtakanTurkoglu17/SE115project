@@ -244,8 +244,25 @@ public class Main {
         }
     }
     
-    public static String bestWeekOfMonth(int month) { 
-        return "DUMMY"; 
+    public static String bestWeekOfMonth(int month) {
+        if (month < 0 || month >= MONTHS) {
+            return "INVALID MONTH";
+        }
+        int bestWeek = 1;
+        int highest = 0;
+        for (int i = 0; i < 4; i++) {
+            int sum = 0;
+            for (int j = i*7;j < i*7+7; j++ ) {
+                for (int k = 0; k< COMMS; k++) {
+                    sum += profits[month][j][k];
+                }
+            }
+            if (sum > highest) {
+                highest = sum;
+                bestWeek = i + 1;
+            }
+        }
+        return "Week " + bestWeek;
     }
 
     public static void main(String[] args) {
